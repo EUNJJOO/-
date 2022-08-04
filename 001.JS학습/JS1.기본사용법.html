@@ -27,6 +27,8 @@
             /* font: 스두크/줄체; */
             font: bold 30px/150px "verdana";
             cursor: pointer;
+
+            /*background: url(./images/kimbs.jpg) no-repeat top/cover;*/
         }
     </style>
     <script>
@@ -322,13 +324,78 @@
           .getElementById('name') // 아이디요소
           .innerHTML = '<img src="./images/kim.png" alt="김비서가 왜그럴까?">';
 
-          // 스타일 변경하기
+          // 3. 스타일 변경하기
           // css를 변경하려면 style을 부른다!
           // 대상: .myo
+          
+          // 변수는 재활용을 목적으로 특정데이터나
+          // 요소등을 저장하는 저장공간이다!
+
+          var 목표 = 
           document // 전체문서
           .getElementsByClassName('myo') // 클래스요소
-          .item(0) // 첫번째요소
-          .style.fontSize = "50px";
+          .item(0); // 첫번째요소
+
+          // 3-1. 글자크기변경
+          목표.style.fontSize = '50px';
+
+          // 3-2. 글자색변경
+          목표.style.color = 'lime';
+
+          // 3-3. 트랜지션
+          목표.style.transition = '2s';
+
+          // 3-4. 가로크기
+          목표.style.width = '550px';
+
+          // 3-5. 세로크기
+          목표.style.height = '400px';
+
+          // 3-6. 글자높이
+          목표.style.lineHeight = '200px';
+
+          // 3-7. 글자그림자
+          목표.style.textShadow = '2px 2px 2px #000';
+
+          // 3-8. 배경이미지
+          목표.style.background = 'url(./images/kimbs.jpg) no-repeat top/cover';
+
+          // 3-9. 회전
+          목표.style.transform = 
+          'translate(-50%, -50%) rotate(360deg)';
+
+          // 3-10. 위치이동
+          목표.style.top = '50%';
+          목표.style.left = '50%';
+
+          // 대상선정: h1
+          var 타이틀 = 
+          document.getElementsByTagName('h1')[0];
+
+          // 글자변경하기
+          // innerText = 변경할글자
+          타이틀.innerText = 'JS의 세계에 오신것을 환영합니다!';
+
+          // 글자크기변경
+          타이틀.style.fontSize = '50px';
+          
+          // 트랜지션
+          타이틀.style.transition = 
+          '3s ease-in-out 2s';
+          // 속성 시간 이징 지연시간
+          // 3초
+
+          // 글자색
+          타이틀.style.color = 'red';
+
+          // body배경색 변경하기
+          var 바디 =
+          document.body;
+          
+          바디.style.backgroundColor = 'pink';
+          바디.style.transition = '5s 5s'; // 동작시간 기다리는 시간
+          
+
 
        } //////////////// 나야나 함수 ///////////////
     </script>
@@ -336,7 +403,7 @@
 
 <body>
     <h1>JS 기본사용법</h1>
-    <p class="myo" onclick="나야나()">
+    <p class="myo" onclick="나야나()" ondblclick="document.getElementsByClassName('myo')[0].style.backgroundImage='url(https://img.marieclairekorea.com/2022/07/mck_62be7911656b5.jpg)'" title="더블클릭시 우영우를 볼 수 있습니다!~~~!!!">
         나는 매일 생각한다.<br />
         도대체 <span id="name"></span>
     </p>
