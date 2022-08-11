@@ -66,6 +66,9 @@
             btns[2].onclick = function(){chgImg(this);};
             btns[3].onclick = function(){chgImg(this);};
 
+            // 클릭된 버튼 요소 자신을 보내는 키워드는 -> this
+            // this는 '나자신'을 뜻함
+
         }); //////////////// load 구역 ////////////////
 
 
@@ -76,9 +79,27 @@
             기능: 이미지 src변경하기
         **************************************/
        function chgImg(U){ // U - 전달변수(버튼자신)
+            
+            // 0. 버튼자신을 보낸 U에서 텍스트읽기
+            var btxt = U.innerText;
+            // innerText는 내부 글자 읽을때도 사용함!
 
             // 1. 함수호출확인
-            console.log('나야나');
+            console.log('나야나',btxt);
+
+            // 이미지 src담는 변수
+            var isrc;
+
+            // 2. 버튼별 이미지 분기하기
+            if(btxt === "포스터") isrc = './images/ala1.jpg';
+            else if(btxt === "장면1") isrc = './images/ala2.jpg';
+            else if(btxt === "장면2") isrc = './images/ala3.jpg';
+            else if(btxt === "장면3") isrc = './images/ala4.jpg';
+
+            // 3. 이미지 변경하기
+            // 대상: #scene
+            document.querySelector('#scene')
+            .src = isrc;
 
        } ////////// chgImg 함수 //////////
        //////////////////////////////////
