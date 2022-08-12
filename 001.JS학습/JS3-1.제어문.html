@@ -335,6 +335,10 @@
                       변경될때 발생하는 이벤트
                       -> onchange 이벤트속성을 사용함!
           *************************************************/
+           function gugu(U){
+                // 1. 함수호출확인
+                console.log('너 누구냐?' ,U);
+           } /////////// gugu함수 ///////////
 
 
         /*************************************************** 
@@ -502,7 +506,8 @@
     <!-- for문 연습 -->
     <h2>for문 연습</h2>
     <h3>구구단 출력하기</h3>
-    <select name="sel" id="sel">
+    <select name="sel" id="sel" onchange="gugu(this)">
+        <!-- this는 select박스 자신을 보내는 것! -->
         <option value="1">구구단을 선택하세요!</option>
         <option value="2">2단</option>
         <option value="3">3단</option>
