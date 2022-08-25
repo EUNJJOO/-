@@ -76,7 +76,31 @@ function loadFn() {
 
     // 3-2. 왼쪽버튼
     abtn[0].onclick = ()=>{
+        // 1. 호출확인
         console.log('왼쪽버튼!');
+        // 2. 대상선정: #slide -> slide변수
+        // 3. 기능구현
+        // 기능1단계
+        // li 요소
+        let lis = slide.querySelectorAll('li');
+        // 맨뒤 요소 맨앞 이동 : insertBefore(넣을놈,넣을놈전놈)
+        slide.insertBefore(lis[lis.length-1],lis[0]);
+        // left값을 -100%로 변경하기
+        slide.style.left = '-100%';
+        // 트랜지션 없애기
+        slide.style.transition = 'none';
+
+        // 기능구현 2단계
+        // 실행시간을 조금 차이를 준다!
+        // setTimeout() 사용!
+        setTimeout(() => {
+            // left값을 0으로 변경
+            slide.style.left = '0';
+            // 트랜지션 설정
+            slide.style.transition = 'left .4s ease-in-out'
+            
+        },10); // 0.01초 후에 실행함 //
+
     }; //////////// click ////////////
     
 } //////////////// loadFn 함수 ///////////////
