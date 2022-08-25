@@ -47,10 +47,22 @@ function loadFn() {
     // 변경 대상: #slide
     let slide = document.querySelector('#slide');
 
-    
+    // 광클금지 상태변수
+    let prot = 0; // 1 - 금지, 0 - 허용
+
     // 3. 클릭이벤트 기능구현
+
     // 3-1. 오른쪽버튼
     abtn[1].onclick = ()=>{
+
+        ///////////// 광클금지 /////////////
+        if (prot) return; // 리턴으로 나감!
+        // prot===1 이라고 안해도 1이면 true!
+        // 1은 true, 0은 false와 서로 교차됨!
+        prot = 1; // 첫번째 신호가 잠금!
+        // 0.4초 후 해제
+        setTimeout(() => prot = 0,400);
+
         // 1. 호출확인
         console.log('오른쪽버튼!');
         // 2. 대상선정: #slide -> slide변수
@@ -72,10 +84,23 @@ function loadFn() {
         },400); // 400은 0.4초
 
 
-    }; //////////// click ////////////
+        // 블릿변경함수 호출(1전달!)
+        chgIndic(1);
+
+
+    }; //////////// 오른쪽 버튼 click ////////////
 
     // 3-2. 왼쪽버튼
     abtn[0].onclick = ()=>{
+
+        ///////////// 광클금지 /////////////
+        if (prot) return; // 리턴으로 나감!
+        // prot===1 이라고 안해도 1이면 true!
+        // 1은 true, 0은 false와 서로 교차됨!
+        prot = 1; // 첫번째 신호가 잠금!
+        // 0.4초 후 해제
+        setTimeout(() => prot = 0,410);
+
         // 1. 호출확인
         console.log('왼쪽버튼!');
         // 2. 대상선정: #slide -> slide변수
@@ -101,7 +126,66 @@ function loadFn() {
             
         },10); // 0.01초 후에 실행함 //
 
-    }; //////////// click ////////////
+        // 블릿변경함수 호출(0전달!)
+        chgIndic(0);
+
+    }; //////////// 왼쪽버튼 click ////////////
+
+
+    // 블릿에서 슬라이드 순번을 읽을 수 있게
+    // 각 슬라이드li에 고유순번 속성 넣기!
+    // 넣는 이유: 슬라이드가 매번 순번이 바뀜!
+    // 넣는 방법은 처음로딩 후 바로 li순번을 넣는다!
+    // for each문 사용!!!
+    let sld = slide.querySelectorAll('li');
+    sld.forEach((ele,idx)=>{ // ele - 각요소, idx - 순번
+        ele.setAttribute('data-seq',idx);
+        // 속성명을 'data-'로 시작하면 내가 만든 속성명을
+        // 사용할 수 있도록 w3c에서 지정함!
+        // setAttribute(속성명, 속성값) -> 속성값 메소드
+    }); /////////// forEach ///////////
+
+    // 블릿요소 변수설정
+    let indic = document.querySelectorAll('.indic li');
+
+    ///// 블릿의 표시를 해당 슬라이드 순번과 같은 
+    // 블릿에 class="on"을 주면 회색이미지로 보임!
+    // 나머지는 모두 on을 빼야함!
+    function chgIndic(num){ 
+        // num - 읽을 슬라이드 순번
+        // 오른쪽버튼은 1, 왼쪽버튼은 0을 전달!
+        
+        // 호출확인!
+        console.log('블릿:',num);
+
+        // 슬라이드 속성 'data-seq'값 읽어오기
+        let seq = 
+        slide.querySelectorAll('li')[num]
+        .getAttribute('data-seq');
+
+        // 값확인
+        console.log('data-seq:',seq);
+
+        // 3. 블릿 클래스 초기화!
+        indic.forEach((ele) => {
+            ele.classList.remove('on');
+        }); //////////// forEach ////////////
+
+        // 4. 슬라이드순번(data-seq)과 같은 순번의
+        // 블릿 li에 class="on"넣기
+        indic[seq].classList.add('on');
+
+        /*
+            [ JS 클래스 컨트롤 메서드 ]
+            classList 객체
+            1) add(클래스명) - 클래스추가
+            2) remove(클래스명) - 클래스제거
+            3) toggle(클래스명) - 클래스추가/제거
+        */ 
+
+
+
+    } //////////// chgIndic 함수 //////////
     
 } //////////////// loadFn 함수 ///////////////
 /////////////////////////////////////////////
