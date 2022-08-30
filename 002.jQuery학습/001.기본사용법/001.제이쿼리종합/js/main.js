@@ -28,8 +28,8 @@ $(()=>{ //////////// jQB ////////////
         2. 초기화 셋팅하기
     *********************************/
    // 2-1. 버튼 셋팅: 모든버튼 다 숨기고 첫번째만 보이게하기
-   //btns.hide().first().show();
-   btns.hide().eq(2).show();
+   btns.hide().first().show();
+   //btns.hide().eq(5).show();
    // 버튼들.숨겨라().첫번째().보여라()
 
    // 주사기, 좀비 코드 변수에 담기
@@ -430,6 +430,52 @@ $(()=>{ //////////// jQB ////////////
        .next().click((e)=>{
         // 콜백함수 : 이동 후 실행함수 //
         let callFn = ()=>{ // 애니후 실행함수
+
+            // 1. 메시지 변경
+            msg.text('도와줘요~!!!')
+            .fadeIn(200);
+
+            // 2. 좀비들 최종추적!!!
+            // -> 1번방에 숨겨진 좀비들
+            // -> bd.eq(1).find('.mz')
+            let tg = bd.eq(1).find('.mz');
+            
+            tg.fadeIn(200,()=>{ // 나타난후 애니
+                // 2-1. 좀비들 움직이기
+                tg.animate({
+                    right: '120%'
+                },5000,"easeInOutExpo")
+
+                // 2-2. 헬기등장
+                let heli = $('.heli');
+                heli.animate({
+                    left: '20%'
+                },3000,"easeOutBack",()=>{
+                    // 3. 주인공이 탄 이미지로 변경
+                    heli.attr('src','images/heli2.png')
+                    // 4. 주인공 지우기(헬기에 탔으니까!)
+                    mi.hide();
+                }) //////////// animate ////////////
+                // 헬기 애니메이션 이어짐!!!
+                .delay(1000) // 5. 1초 기다림
+                // 6. 오른쪽 끝으로 감 
+                .animate({
+                    left: '70%'
+                },4000,"easeInOutQuart",()=>{
+                    // 7. 헬기조종사좀비 이미지로 변경
+                    heli.attr('src','images/heli3.png') 
+                }) ////////////// animate //////////
+                // 헬기 애니메이션 이어짐!!!
+                .animate({
+                    left: '100%'
+                },10000,"easeInOutSine",()=>{
+                    // 최종애니!!
+                    // 힌드: addClass(클래스명)
+                    // 시간차이는 setTimeout()사용
+                    // 간판떨어지기
+                    // 건물무너지기
+                })
+            }) //////////// fadeIn ////////////
 
             // 다음 버튼 보이기
             $(e.currentTarget).next().slideDown(400);
