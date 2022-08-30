@@ -277,6 +277,48 @@ $(()=>{ //////////// jQB ////////////
             .fadeIn(200,()=>msg.text('무.서.워..'))
             .delay(500)
             .fadeIn(200,()=>msg.text('무.서.워...'))
+            .delay(500)
+            .fadeIn(200,()=>{
+                // 2. 좀비 달려오기
+                // -> 7번방 좀비: bd.eq(7).find('.mz')
+                let tg = bd.eq(7);
+                // 2-1. 윗층으로 올라오기
+                // 같은 대상에 연속해서 애니메이션을 줄경우
+                // 큐(Queue)에 등록되어 순서대로 실행됨!
+                tg.find('.mz')
+                .animate({ // 아래서 위로 올라오기
+                    bottom:'100%'
+                }, 300, "easeOutBack")
+                .animate({ // 오른쪽에서 달려오기
+                    right:'120%'
+                }, 1000, "easeOutBounce",
+                ()=>{ // 애니 후 실행함수
+                    // 3. 주인공 사색되기!(흑백처리)
+                    mi.css({
+                        filter:'grayscale(70%)'
+                    }); ///////// css /////////
+
+                    // 4. 메시지 지우기
+                    msg.hdie();
+
+                    // 5. 2초 뒤에 좀비되기
+                    setTimeout(()=>{
+                        // 5-1. 좀비이미지 변경
+                        mi.find('img')
+                        .attr('src','');
+                        // attr(속성명, 속성값)
+                        // -> 속성값 변경 메서드
+                        // 비교) JS의 setAttribute()
+                        // 참고) 속성값 가져오기는 
+                        // -> attr(속성명)
+                        // 비교) JA의 getAttribute()
+
+                    },2000); ////////// 타임아웃 //////////
+
+                }) ////////// animate //////////
+
+            }) ////////// fadeIn //////////
+
 
             // 다음 버튼 보이기
             $(e.currentTarget).next().slideDown(400);
