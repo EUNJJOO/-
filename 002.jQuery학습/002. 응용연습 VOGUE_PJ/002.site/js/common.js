@@ -20,6 +20,20 @@ $(()=>{////////// jQB /////////////////////
    let scTop;
    // 스크롤 등장클래스 담기
    let scAct = $('.scAct');
+
+   // 스크롤 등장클래스의 각 위치를 담을 변수
+   const scpos = [];
+
+   // 스크롤 등장클래스 위치값 셋팅하기
+   scAct.each((idx,ele)=>{ // idx - 순번, ele - 요소
+    // 위치값을 scpos배열 변수에 넣기
+    scpos[idx] = $(ele).offset().top;
+
+   }); /////////// each ///////////
+
+   // 위치배열값 확인!
+   scpos.forEach((val)=>console.log(val));
+
    // 상단영역 변수
    let topA = $('#top');
    // 탑버튼 변수
@@ -47,11 +61,27 @@ $(()=>{////////// jQB /////////////////////
         if(scTop >= 300) tbtn.addClass('on');
         else tbtn.removeClass('on');
 
-        // 스크롤 등장 요소에 클래스 on 넣기
+        // 3. 스크롤 등장 요소에 클래스 on 넣기
         if(scTop > 400){
             scAct.first().addClass('on');
         }
 
     }); /////////////////// scroll ///////////////////
+
+    // 위로가기 버튼 클릭시 맨위로 애니메이션 
+    // 위로가기 버튼은 a요소이므로 기본이동 막기필요!
+    tbtn.click((e)=>{
+        // 기본이동막기
+        e.preventDefault();
+        // prevent 막다, Default 기본기능
+        // 제이쿼리 전용 기본기능 막는 메서드임!
+
+        // 스크롤 이동 애니메이션의 대상은? html,body
+        $('html,body').animate({
+            scrollTop: '0'
+        },400);
+        
+
+    }); /////////// click ///////////
 
 });////////////// jQB /////////////////////
