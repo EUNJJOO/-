@@ -501,12 +501,23 @@ $(() => { ///////// jQB /////////////////
               // 2단계: 3초후 간판 떨어짐(.on2)
               setTimeout(()=>{
                 tit.addClass('on2');
+                
+                // 9. 건물무너지기
+                // 대상: .building
+                // bd변수를 이용해보자!
+                // 한단계 위인 부모로 올라감
+                // parent() -> 부모로 올라감
+                bd.parent().addClass('on');
+
+                // 비교) 부모로 올라가기 -> parentNode
+                document.getElementById().paentNode
+
               },3000); //////// 타임아웃 ////////
   
-              // 건물무너지기
-            })
+
+            }); //////// animate ////////
   
-          }) ////////// fadeIn ////////
+          }); ////////// fadeIn ////////
   
           // 다음 버튼 보이기
           $(e.currentTarget).next().slideDown(400);
