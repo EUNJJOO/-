@@ -17,25 +17,48 @@
 // html페이지에서 <script src="제이슨파일"> 이렇게 호출함!
 // 코드에서 JSON.parse(변수) 제이슨 변환 메서드를 사용해 코딩함!
 
+// 제이슨 데이터 할당변수
+let sinfo;
+
+// 제이슨 데이터 연결하여 할당하기!
+$(()=>{ ///////////// jQB ////////////////
+
+    // $.getJSON(파일경로,함수)
+    // $.getJSON(파일경로,(변수)=>{코드})
+    $.getJSON('js/cat.json',헐=>{
+        // 제이슨 파일에서 가져온 데이터를 변수에 할당!
+        sinfo = 헐;
+        // 데이터 확인
+        // console.log(sinfo);
+        
+        // 데이터 할당 후 기능구현 함수 호출
+        loadFn();
+
+    }); //////////// getJSON ///////////////
+
+}); ////////////////// jQB ///////////////
+
 
 
 
 
 // URL로 넘어온 파라미터 전달값 받기 //////
-let pm = location.href
+let pm = location.href;
 // console.log('파라미터:',pm);
 
 // 만약 물음표(?)가 없으면 메뉴를 클릭한 것이 아니므로
 // 첫페이지로 돌아가게 한다!!!
-if(pm.indexOf('?'===1) location.href = 'index.html'
+if(pm.indexOf('?')===-1) location.href = 'index.html';
 
 // 현재 파라미터값만 필요하므로
 // 물음표(?)로 잘라서 뒤엣것 -> [1]
 // 이퀄(=)로 잘라서 뒤엣것 -> [1]
-pm = pm.split('?')[1].splilt('=')[1];
+pm = pm.split('?')[1].split('=')[1];
 // 특수문자복원하기
+pm = decodeURIComponent(pm);
 
-console.log('파파미터',pm);
+console.log('파라미터:',pm);
+
 
 
 
@@ -46,11 +69,13 @@ console.log('파파미터',pm);
 function loadFn(){
 
     // 1. 해당 카테고리의 데이터 셋업
-    
+    const data = sinfo[pm];
+    console.log('선택데이터:',data);
 
     // 2. 데이터 페이지 바인딩하기 ////
     // (1) 타이틀 넣기
-    
+    $('.stit').text(data['제목']);
+    // $('.stit').text(data.제목);
 
     // (2) .cont에 카테고리명으로 클래스 넣기
     // -> 미리셋팅된 배경이미지가 컨텐츠박스에 나옴!
