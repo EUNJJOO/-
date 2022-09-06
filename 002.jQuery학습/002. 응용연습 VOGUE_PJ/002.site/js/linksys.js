@@ -10,9 +10,33 @@ $(() => { ////////// jQB ///////////////////////
     // 메서드: before(요소) -> 선택요소 앞에 형제요소 삽입
     // -> 참고) after(요소) -> 선택요소 뒤에 형제요소 삽입
     // 선택자 :last는 제이쿼리 전용임!
+    $('.sns a:last').before(`
+        <a class="fi fi-laptop">
+            <span class="ir">
+                로그인
+            </span>
+        </a>
+        <a class="fi fi-user-secret">
+            <span class="ir">
+                회원가입
+            </span>
+        </a>
+        <a class="fi fi-camera">
+            <span class="ir">
+                갤러리
+            </span>
+        </a>
+    `);
     
 
     ///// sns 파트 a요소들에 툴팁넣기 ////////
+    $('.sns a').each((idx, ele)=>{
+        // attr(속성명,값)
+        // -> 값으로 자식요소의 .ir의 텍스트읽기
+        $(ele)
+        .attr('title',
+        $(ele).children('.ir').text().trim());
+    }); /////////////// each ///////////////
     
 
     // 선택메서드 비교
@@ -35,6 +59,44 @@ $(() => { ////////// jQB ///////////////////////
         let atxt = $(ele).text().trim();
         // trim() 앞뒤공백제거
         console.log(atxt);
+
+        // 3. 이동할 페이지 주소 할당하기
+        let url;
+        switch(atxt){
+            case "인스타그램":
+                url = "https://www.instagram.com/VOGUEKOREA/";
+                break;
+            case "페이스북":
+                url = "https://www.facebook.com/VOGUEkr";
+                break;
+            case "트위터":
+                url = "https://twitter.com/VogueKorea";
+                break;
+            case "유튜브":
+                url = "https://www.youtube.com/user/VogueKorea?sub_confirmation=1";
+                break;
+            case "카카오스토리":
+                url = "https://story.kakao.com/ch/voguekr";
+                break;
+            case "로그인":
+                url = "login.html";
+                break;
+            case "회원가입":
+                url = "member.html";
+                break;
+            case "갤러리":
+                url = "gallery.html";
+                break;
+        } ///////////// switch case /////////////
+
+        // 4. 페이지 이동하기
+        if  (atxt == "로그인" ||
+            atxt === "회원가입" ||
+            atxt === "갤러리")
+            location.href = url;
+        else // 기타 sns는 새창열기
+            window.open().location.href = url;
+        // window.open() 새창열기
 
     }); //////////// click ////////////
     
